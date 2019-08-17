@@ -1,16 +1,31 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String BORDER = "    ____________________________________________________________";
     private static boolean isBye = false;
+    private static ArrayList<String> list = new ArrayList<>();
 
     private static void printBorder() {
         System.out.println(BORDER);
     }
 
-    private static void printMessage(String s) {
+    private static void printMessage(String msg) {
         printBorder();
-        System.out.println("    " + s);
+        System.out.println("    " + msg);
+        printBorder();
+    }
+
+    private static void addItem(String item) {
+        list.add(item);
+        printMessage("added: " + item);
+    }
+
+    private static void printList() {
+        printBorder();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + list.get(i));
+        }
         printBorder();
     }
 
@@ -34,8 +49,10 @@ public class Duke {
             if (command.equals("bye")) {
                 isBye = true;
                 printMessage("Bye. Hope to see you again soon!");
+            } else if (command.equals("list")) {
+                printList();
             } else {
-                printMessage(command);
+                addItem(command);
             }
         }
 

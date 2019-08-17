@@ -30,7 +30,7 @@ public class Duke {
         printBorder();
 
         while(!isBye) {
-            String command = input.next();
+            String command = input.nextLine();
             if (command.equals("bye")) {
                 isBye = true;
                 printMessage("Bye. Hope to see you again soon!");

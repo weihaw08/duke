@@ -10,10 +10,27 @@ public class Duke {
         System.out.println(BORDER);
     }
 
-    private static void addTask(String task) {
+    private static void printMessage(String msg) {
+        System.out.println("     " + msg);
+    }
+
+    // A method to help us check if the instruction entered into Duke is valid.
+    private static boolean isCorrectInstruction(String task) {
+        return task.equals("todo") || task.equals("deadline") || task.equals("event");
+    }
+
+    // This method helps to perform the relevant tasks depending on the input.
+    // Exceptions will be thrown if the input is invalid.
+    private static void addTask(String task) throws EmptyDescriptionException, WrongInstructionException{
         String[] tokens = task.split(" ");
         Task newTask;
-        if (tokens[0].equals("todo")) {
+        if (!isCorrectInstruction(tokens[0])) {
+            // This will happen if the instruction is invalid.
+            throw new WrongInstructionException();
+        } else if (tokens.length == 1) {
+            // This will happen if the instruction is valid but lacks a description.
+            throw new EmptyDescriptionException(tokens[0]);
+        } else if (tokens[0].equals("todo")) {
             String todoName = task.replace("todo ", "");
             newTask = new ToDo(todoName);
             list.add(newTask);
@@ -28,17 +45,17 @@ public class Duke {
             newTask = new Event(splitEvent[0], splitEvent[1]);
             list.add(newTask);
         }
-        System.out.println("     Got it. I've added this task:");
+        printMessage("Got it. I've added this task:");
         System.out.println("       " + newTask.toString());
         if (list.size() == 1) {
-            System.out.println("     Now you have 1 task in the list.");
+            printMessage("Now you have 1 task in the list.");
         } else {
-            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            printMessage("Now you have " + list.size() + " tasks in the list.");
         }
     }
 
     private static void printList() {
-        System.out.println("     Here are the tasks in your list:");
+        printMessage("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println("     " + (i + 1) + ". " + list.get(i));
         }
@@ -46,22 +63,28 @@ public class Duke {
 
     private static void performCommand(String command) {
         String[] tokens = command.split(" ");
-        switch (tokens[0]) {
-        case "bye":
-            isBye = true;
-            System.out.println("     Bye. Hope to see you again soon!");
-            break;
-        case "list":
-            printList();
-            break;
-        case "done":
-            int taskNumber = Integer.valueOf(tokens[1]) - 1;
-            Task completedTask = list.get(taskNumber);
-            completedTask.markAsDone();
-            break;
-        default:
-            addTask(command);
-            break;
+        try {
+            switch (tokens[0]) {
+            case "bye":
+                isBye = true;
+                printMessage("Bye. Hope to see you again soon!");
+                break;
+            case "list":
+                printList();
+                break;
+            case "done":
+                int taskNumber = Integer.valueOf(tokens[1]) - 1;
+                Task completedTask = list.get(taskNumber);
+                completedTask.markAsDone();
+                break;
+            default:
+                addTask(command);
+                break;
+            }
+        } catch (EmptyDescriptionException e1) {
+            printMessage(e1.toString());
+        } catch (WrongInstructionException e2) {
+            printMessage(e2.toString());
         }
     }
 
@@ -76,8 +99,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         printBorder();
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
+        printMessage("Hello! I'm Duke");
+        printMessage("What can I do for you?");
         printBorder();
 
         while(!isBye) {

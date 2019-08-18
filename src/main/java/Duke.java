@@ -49,7 +49,7 @@ public class Duke {
         switch (tokens[0]) {
         case "bye":
             isBye = true;
-            System.out.println("      Bye. Hope to see you again soon!");
+            System.out.println("     Bye. Hope to see you again soon!");
             break;
         case "list":
             printList();

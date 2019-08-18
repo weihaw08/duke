@@ -14,6 +14,14 @@ public class Duke {
         System.out.println("     " + msg);
     }
 
+    private static void printListSize() {
+        if (list.size() == 1) {
+            printMessage("Now you have 1 task in the list.");
+        } else {
+            printMessage("Now you have " + list.size() + " tasks in the list.");
+        }
+    }
+
     // A method to help us check if the instruction entered into Duke is valid.
     private static boolean isCorrectInstruction(String task) {
         return task.equals("todo") || task.equals("deadline") || task.equals("event");
@@ -47,10 +55,40 @@ public class Duke {
         }
         printMessage("Got it. I've added this task:");
         System.out.println("       " + newTask.toString());
-        if (list.size() == 1) {
-            printMessage("Now you have 1 task in the list.");
+        printListSize();
+    }
+
+    private static void doneTask(String task) throws EmptyListException, IndexNotFoundException {
+        String[] tokens = task.split(" ");
+        int indexToRemove = Integer.valueOf(tokens[1]);
+        if (list.size() == 0) {
+            throw new EmptyListException();
+        } else if (indexToRemove > list.size() || indexToRemove <= 0) {
+            throw new IndexNotFoundException(indexToRemove);
         } else {
-            printMessage("Now you have " + list.size() + " tasks in the list.");
+            int taskNumber = Integer.valueOf(tokens[1]) - 1;
+            Task completedTask = list.get(taskNumber);
+            completedTask.markAsDone();
+            printMessage("Nice! I've marked this task as done:");
+            System.out.println("     " + completedTask.toString());
+        }
+    }
+
+    // The following function helps to delete an item inside Duke.
+    // An exception will be thrown if the list is empty or when the index is out of bounds.
+    private static void deleteTask(String task) throws EmptyListException, IndexNotFoundException {
+        String[] tokens = task.split(" ");
+        int indexToRemove = Integer.valueOf(tokens[1]);
+        if (list.size() == 0) {
+            throw new EmptyListException();
+        } else if (indexToRemove > list.size() || indexToRemove <= 0) {
+            throw new IndexNotFoundException(indexToRemove);
+        } else {
+            Task toBeRemoved = list.get(indexToRemove - 1);
+            list.remove(indexToRemove - 1);
+            printMessage("Noted. I've removed this task:");
+            System.out.println("       " + toBeRemoved);
+            printListSize();
         }
     }
 
@@ -73,9 +111,10 @@ public class Duke {
                 printList();
                 break;
             case "done":
-                int taskNumber = Integer.valueOf(tokens[1]) - 1;
-                Task completedTask = list.get(taskNumber);
-                completedTask.markAsDone();
+                doneTask(command);
+                break;
+            case "delete":
+                deleteTask(command);
                 break;
             default:
                 addTask(command);
@@ -85,6 +124,10 @@ public class Duke {
             printMessage(e1.toString());
         } catch (WrongInstructionException e2) {
             printMessage(e2.toString());
+        } catch (EmptyListException e3) {
+            printMessage(e3.toString());
+        } catch (IndexNotFoundException e4) {
+            printMessage(e4.toString());
         }
     }
 

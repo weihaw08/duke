@@ -1,6 +1,6 @@
-public class Task {
-    private String taskName;
-    private boolean isDone;
+public abstract class Task {
+    String taskName;
+    boolean isDone;
 
     Task(String taskName) {
         this.taskName = taskName;
@@ -10,12 +10,8 @@ public class Task {
     void markAsDone() {
         this.isDone = true;
         System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("     " + this);
+        System.out.println("     " + this.toString());
     }
 
-    @Override
-    public String toString() {
-        String sym = isDone ? "✓" : "✗";
-        return "[" + sym + "] " + taskName;
-    }
+    public abstract String toString();
 }

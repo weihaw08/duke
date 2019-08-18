@@ -10,14 +10,31 @@ public class Duke {
         System.out.println(BORDER);
     }
 
-    private static void printMessage(String msg) {
-        System.out.println("     " + msg);
-    }
-
-    private static void addItem(String item) {
-        Task newTask = new Task(item);
-        list.add(newTask);
-        printMessage("added: " + item);
+    private static void addTask(String task) {
+        String[] tokens = task.split(" ");
+        Task newTask;
+        if (tokens[0].equals("todo")) {
+            String todoName = task.replace("todo ", "");
+            newTask = new ToDo(todoName);
+            list.add(newTask);
+        } else if (tokens[0].equals("deadline")) {
+            String deadlineName = task.replace("deadline ", "");
+            String[] splitDeadline = deadlineName.split(" /by ");
+            newTask = new Deadline(splitDeadline[0], splitDeadline[1]);
+            list.add(newTask);
+        } else {
+            String eventName = task.replace("event ", "");
+            String[] splitEvent = eventName.split(" /at ");
+            newTask = new Event(splitEvent[0], splitEvent[1]);
+            list.add(newTask);
+        }
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + newTask.toString());
+        if (list.size() == 1) {
+            System.out.println("     Now you have 1 task in the list.");
+        } else {
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+        }
     }
 
     private static void printList() {
@@ -32,7 +49,7 @@ public class Duke {
         switch (tokens[0]) {
         case "bye":
             isBye = true;
-            printMessage("Bye. Hope to see you again soon!");
+            System.out.println("      Bye. Hope to see you again soon!");
             break;
         case "list":
             printList();
@@ -43,7 +60,7 @@ public class Duke {
             completedTask.markAsDone();
             break;
         default:
-            addItem(command);
+            addTask(command);
             break;
         }
     }

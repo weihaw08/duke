@@ -60,14 +60,13 @@ public class Duke {
 
     private static void doneTask(String task) throws EmptyListException, IndexNotFoundException {
         String[] tokens = task.split(" ");
-        int indexToRemove = Integer.valueOf(tokens[1]);
+        int indexToComplete= Integer.parseInt(tokens[1]);
         if (list.size() == 0) {
             throw new EmptyListException();
-        } else if (indexToRemove > list.size() || indexToRemove <= 0) {
-            throw new IndexNotFoundException(indexToRemove);
+        } else if (indexToComplete > list.size() || indexToComplete <= 0) {
+            throw new IndexNotFoundException(indexToComplete);
         } else {
-            int taskNumber = Integer.valueOf(tokens[1]) - 1;
-            Task completedTask = list.get(taskNumber);
+            Task completedTask = list.get(indexToComplete - 1);
             completedTask.markAsDone();
             printMessage("Nice! I've marked this task as done:");
             System.out.println("     " + completedTask.toString());
@@ -78,7 +77,7 @@ public class Duke {
     // An exception will be thrown if the list is empty or when the index is out of bounds.
     private static void deleteTask(String task) throws EmptyListException, IndexNotFoundException {
         String[] tokens = task.split(" ");
-        int indexToRemove = Integer.valueOf(tokens[1]);
+        int indexToRemove = Integer.parseInt(tokens[1]);
         if (list.size() == 0) {
             throw new EmptyListException();
         } else if (indexToRemove > list.size() || indexToRemove <= 0) {

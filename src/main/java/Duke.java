@@ -1,10 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+
 public class Duke {
     private static final String BORDER = "    ____________________________________________________________";
     private static boolean isBye = false;
     private static ArrayList<Task> list = new ArrayList<>();
+    private static String filePath = "./data/tasks.txt";
 
     private static void printBorder() {
         System.out.println(BORDER);
@@ -130,7 +135,49 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    private static void initialiseDuke() throws IOException {
+        File f = new File(filePath);
+        if (f.exists()) {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                processLine(s.nextLine());
+            }
+            s.close();
+        } else {
+            f.getParentFile().mkdir();
+            f.createNewFile();
+        }
+    }
+
+    private static void processLine(String line) {
+        String[] tokens = line.split(" ~ ");
+        boolean isDone = Boolean.valueOf(tokens[1]);
+        switch (tokens[0]) {
+        case "T":
+            list.add(new ToDo(tokens[2], isDone));
+            break;
+        case "E":
+            list.add(new Event(tokens[2], isDone, tokens[3]));
+            break;
+        case "D":
+            list.add(new Deadline(tokens[2], isDone, tokens[3]));
+            break;
+        default:
+            break;
+        }
+
+    }
+
+    private static void storeData() throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : list) {
+            fw.write(task.convertToText() + "\n");
+        }
+        fw.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+        initialiseDuke();
         Scanner input = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -153,5 +200,7 @@ public class Duke {
         }
 
         input.close();
+        storeData();
+
     }
 }

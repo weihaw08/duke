@@ -8,9 +8,10 @@ public class Event extends Task{
         this.end = end;
     }
 
-    Event(String taskName, boolean isDone, String timing) {
+    Event(String taskName, boolean isDone, FormattedDate start, FormattedDate end) {
         super(taskName, isDone);
-        this.timing = timing;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -21,6 +22,6 @@ public class Event extends Task{
 
     @Override
     protected String convertToText() {
-        return "E" + " ~ " + this.isDone + " ~ " + this.taskName + " ~ " + this.timing;
+        return "E" + " ~ " + this.isDone + " ~ " + this.taskName + " ~ " + this.start + " - " + this.end;
     }
 }

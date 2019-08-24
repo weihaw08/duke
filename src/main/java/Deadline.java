@@ -6,7 +6,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
-    Deadline(String taskName, boolean isDone, String deadline) {
+    Deadline(String taskName, boolean isDone, FormattedDate deadline) {
         super(taskName, isDone);
         this.deadline = deadline;
     }

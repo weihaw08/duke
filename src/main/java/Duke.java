@@ -171,21 +171,32 @@ public class Duke {
         }
     }
 
-    private static void processLine(String line) {
+    private static void processLine(String line)  {
         String[] tokens = line.split(" ~ ");
         boolean isDone = Boolean.valueOf(tokens[1]);
-        switch (tokens[0]) {
-        case "T":
-            list.add(new ToDo(tokens[2], isDone));
-            break;
-        case "E":
-            list.add(new Event(tokens[2], isDone, tokens[3]));
-            break;
-        case "D":
-            list.add(new Deadline(tokens[2], isDone, tokens[3]));
-            break;
-        default:
-            break;
+        try {
+            switch (tokens[0]) {
+            case "T":
+                list.add(new ToDo(tokens[2], isDone));
+                break;
+            case "E":
+                String[] startAndEnd = tokens[3].split(" - ");
+                FormattedDate start = new FormattedDate(startAndEnd[0]);
+                FormattedDate end = new FormattedDate(startAndEnd[1]);
+                list.add(new Event(tokens[2], isDone, start, end));
+                break;
+            case "D":
+                FormattedDate by = new FormattedDate(tokens[3]);
+                list.add(new Deadline(tokens[2], isDone, by));
+                break;
+            default:
+                break;
+            }
+        } catch (ParseException e) {
+            printMessage("☹ OOPS!!! Date and time should be in \"dd/mm/yyyy hhmm\"");
+            printMessage("format! here");
+        } catch (InvalidTimeAndDateException e) {
+            printMessage(e.toString());
         }
 
     }

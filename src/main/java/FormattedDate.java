@@ -22,7 +22,7 @@ public class FormattedDate {
         int month = Integer.valueOf(tokens[1]);
         int year = Integer.valueOf(tokens[2]);
         YearMonth findDays = YearMonth.of(year, month);
-        return month >= 1 && month <= 12 && day <= findDays.lengthOfMonth();
+        return month >= 1 && month <= 12 && day <= findDays.lengthOfMonth() && day >= 1;
     }
 
     private boolean isValidTime(String time) {

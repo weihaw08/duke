@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,7 +7,7 @@ import java.io.IOException;
 import java.io.File;
 
 public class Duke {
-    private static final String BORDER = "    ____________________________________________________________";
+    private static final String BORDER = "    ____________________________________________________________________";
     private static boolean isBye = false;
     private static ArrayList<Task> list = new ArrayList<>();
     private static String filePath = "./data/tasks.txt";
@@ -34,9 +35,10 @@ public class Duke {
 
     // This method helps to perform the relevant tasks depending on the input.
     // Exceptions will be thrown if the input is invalid.
-    private static void addTask(String task) throws EmptyDescriptionException, WrongInstructionException{
+    private static void addTask(String task) throws EmptyDescriptionException, WrongInstructionException,
+            InvalidTimeAndDateException, ParseException {
         String[] tokens = task.split(" ");
-        Task newTask;
+        Task newTask = null;
         if (!isCorrectInstruction(tokens[0])) {
             // This will happen if the instruction is invalid.
             throw new WrongInstructionException();
@@ -50,21 +52,36 @@ public class Duke {
         } else if (tokens[0].equals("deadline")) {
             String deadlineName = task.replace("deadline ", "");
             String[] splitDeadline = deadlineName.split(" /by ");
-            newTask = new Deadline(splitDeadline[0], splitDeadline[1]);
+            FormattedDate byTime = new FormattedDate(splitDeadline[1]);
+            newTask = new Deadline(splitDeadline[0], byTime);
             list.add(newTask);
         } else {
-            String eventName = task.replace("event ", "");
-            String[] splitEvent = eventName.split(" /at ");
-            newTask = new Event(splitEvent[0], splitEvent[1]);
-            list.add(newTask);
+            try {
+                String eventName = task.replace("event ", "");
+                String[] splitEvent = eventName.split(" /at ");
+                String[] startAndEnd = splitEvent[1].split(" - ");
+                FormattedDate start = new FormattedDate(startAndEnd[0]);
+                FormattedDate end = new FormattedDate(startAndEnd[1]);
+                newTask = new Event(splitEvent[0], start, end);
+                list.add(newTask);
+            } catch (ParseException e){
+                printMessage("☹ OOPS!!! Please enter the start and end dates like this:");
+                printMessage("\"dd/mm/yyyy hhmm - dd/mm/yyyy hhmm\"!");
+            }
         }
-        printMessage("Got it. I've added this task:");
-        System.out.println("       " + newTask.toString());
-        printListSize();
+        if (newTask != null) {
+            printMessage("Got it. I've added this task:");
+            System.out.println("       " + newTask.toString());
+            printListSize();
+        }
     }
 
-    private static void doneTask(String task) throws EmptyListException, IndexNotFoundException {
+    private static void doneTask(String task) throws EmptyListException, IndexNotFoundException,
+            EmptyDescriptionException {
         String[] tokens = task.split(" ");
+        if (tokens.length != 2) {
+            throw new EmptyDescriptionException(task);
+        }
         int indexToComplete= Integer.parseInt(tokens[1]);
         if (list.size() == 0) {
             throw new EmptyListException();
@@ -132,6 +149,11 @@ public class Duke {
             printMessage(e3.toString());
         } catch (IndexNotFoundException e4) {
             printMessage(e4.toString());
+        } catch (ParseException e5) {
+            printMessage("☹ OOPS!!! Date and time should be in \"dd/mm/yyyy hhmm\"");
+            printMessage("format!");
+        } catch (InvalidTimeAndDateException e6) {
+            printMessage(e6.toString());
         }
     }
 

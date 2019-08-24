@@ -1,9 +1,11 @@
 public class Event extends Task{
-    private String timing;
+    private FormattedDate start;
+    private FormattedDate end;
 
-    Event(String taskName, String timing) {
+    Event(String taskName, FormattedDate start, FormattedDate end) {
         super(taskName);
-        this.timing = timing;
+        this.start = start;
+        this.end = end;
     }
 
     Event(String taskName, boolean isDone, String timing) {
@@ -14,7 +16,7 @@ public class Event extends Task{
     @Override
     public String toString() {
         String sym = this.isDone ? "\u2713" : "\u2717";
-        return "[E]" + "[" + sym + "] " + this.taskName + " (at: " + this.timing + ")";
+        return "[E]" + "[" + sym + "] " + this.taskName + " (at: " + this.start + " - " + this.end + ")";
     }
 
     @Override

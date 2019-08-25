@@ -5,7 +5,6 @@ import duke.functionality.Parser;
 import duke.functionality.Storage;
 import duke.functionality.TaskList;
 import duke.functionality.Ui;
-
 import java.util.Scanner;
 
 public class Duke {

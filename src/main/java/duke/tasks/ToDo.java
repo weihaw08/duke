@@ -1,10 +1,12 @@
+package duke.tasks;
+
 public class ToDo extends Task {
 
-    ToDo(String taskName) {
+    public ToDo(String taskName) {
         super(taskName);
     }
 
-    ToDo(String taskName, boolean isDone) {
+    public ToDo(String taskName, boolean isDone) {
         super(taskName, isDone);
     }
 
@@ -15,7 +17,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    protected String convertToText() {
+    public String convertToText() {
         return "T" + " ~ " + this.isDone + " ~ " + this.taskName;
     }
 }

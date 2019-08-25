@@ -1,7 +1,9 @@
+package duke.exception;
+
 public class IndexNotFoundException extends Exception {
     private int missingIndex;
 
-    IndexNotFoundException(int missingIndex) {
+    public IndexNotFoundException(int missingIndex) {
         this.missingIndex = missingIndex;
     }
 

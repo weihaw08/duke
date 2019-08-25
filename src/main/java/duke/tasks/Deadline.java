@@ -1,12 +1,14 @@
+package duke.tasks;
+
 public class Deadline extends Task {
     private FormattedDate deadline;
 
-    Deadline(String taskName, FormattedDate deadline) {
+    public Deadline(String taskName, FormattedDate deadline) {
         super(taskName);
         this.deadline = deadline;
     }
 
-    Deadline(String taskName, boolean isDone, FormattedDate deadline) {
+    public Deadline(String taskName, boolean isDone, FormattedDate deadline) {
         super(taskName, isDone);
         this.deadline = deadline;
     }
@@ -18,7 +20,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    protected String convertToText() {
+    public String convertToText() {
         return "D" + " ~ " + this.isDone + " ~ " + this.taskName + " ~ " + this.deadline;
     }
 }

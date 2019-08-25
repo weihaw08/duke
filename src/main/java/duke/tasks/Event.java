@@ -1,14 +1,16 @@
-public class Event extends Task{
+package duke.tasks;
+
+public class Event extends Task {
     private FormattedDate start;
     private FormattedDate end;
 
-    Event(String taskName, FormattedDate start, FormattedDate end) {
+    public Event(String taskName, FormattedDate start, FormattedDate end) {
         super(taskName);
         this.start = start;
         this.end = end;
     }
 
-    Event(String taskName, boolean isDone, FormattedDate start, FormattedDate end) {
+    public Event(String taskName, boolean isDone, FormattedDate start, FormattedDate end) {
         super(taskName, isDone);
         this.start = start;
         this.end = end;
@@ -21,7 +23,7 @@ public class Event extends Task{
     }
 
     @Override
-    protected String convertToText() {
+    public String convertToText() {
         return "E" + " ~ " + this.isDone + " ~ " + this.taskName + " ~ " + this.start + " - " + this.end;
     }
 }

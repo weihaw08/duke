@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.exception.InvalidTimeAndDateException;
+
 import java.util.Date;
 import java.time.YearMonth;
 import java.text.SimpleDateFormat;
@@ -7,7 +11,7 @@ public class FormattedDate {
     private Date date;
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    FormattedDate(String s) throws ParseException, InvalidTimeAndDateException {
+    public FormattedDate(String s) throws ParseException, InvalidTimeAndDateException {
         this.date = FORMAT.parse(s);
         String[] tokens = s.split(" ");
         Date currentDate = new Date();

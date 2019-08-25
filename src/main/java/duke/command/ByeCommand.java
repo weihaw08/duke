@@ -17,7 +17,9 @@ public class ByeCommand extends Command {
             ui.printByeMessage();
             storage.save(taskList.obtainList());
         } catch (IOException e) {
-            System.out.println("Duke's memory cannot be found!");
+            ui.printBorder();
+            ui.printMessage("Please help me find the way to my brain! T_T");
+            ui.printBorder();
         }
     }
 }

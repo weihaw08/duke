@@ -8,7 +8,7 @@ public class Ui {
     private boolean isBye;
 
     public Ui() {
-       this.isBye = false;
+        this.isBye = false;
     }
 
     public void printBorder() {

@@ -1,6 +1,6 @@
 package duke.exception;
 
-public class EmptyDescriptionException extends Exception{
+public class EmptyDescriptionException extends Exception {
     private String taskType;
 
     public EmptyDescriptionException(String taskType) {

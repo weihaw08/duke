@@ -18,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String sym = this.isDone ? "\u2713" : "\u2717";
+        String sym = this.isDone ? "✓" : "✗";
         return "[E]" + "[" + sym + "] " + this.taskName + " (at: " + this.start + " - " + this.end + ")";
     }
 

@@ -1,6 +1,11 @@
 package duke.functionality;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongInstructionException;
 
@@ -13,6 +18,7 @@ public class Parser {
         this.tokens = command.split(" ");
         this.command = command;
     }
+
     private boolean isAddCommand(String command) {
         return command.equals("todo") || command.equals("deadline") || command.equals("event");
     }

@@ -57,13 +57,13 @@ public class Ui {
         String messageToPrint;
         boolean isListModified;
         if (modification.equals("add")) {
-            messageToPrint = "UWU. duke.tasks.Task has been added:";
+            messageToPrint = "UWU. A task has been added:";
             isListModified = true;
         } else if (modification.equals("delete")) {
-            messageToPrint = "OWO. duke.tasks.Task has been removed:";
+            messageToPrint = "OWO. A task has been removed:";
             isListModified = true;
         } else {
-            messageToPrint = "^W^. duke.tasks.Task has been marked done:";
+            messageToPrint = "^W^. A task has been marked done:";
             isListModified = false;
         }
         printMessage(messageToPrint);

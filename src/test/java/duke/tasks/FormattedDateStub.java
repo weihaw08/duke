@@ -1,7 +1,7 @@
-package tasks;
+package duke.tasks;
 
 import duke.exception.InvalidTimeAndDateException;
-import duke.tasks.FormattedDate;
+
 import java.text.ParseException;
 
 class FormattedDateStub extends FormattedDate {

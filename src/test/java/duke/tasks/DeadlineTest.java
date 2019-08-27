@@ -1,8 +1,8 @@
-package tasks;
+package duke.tasks;
 
 import duke.exception.InvalidTimeAndDateException;
-import duke.tasks.Deadline;
 import org.junit.jupiter.api.Test;
+
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

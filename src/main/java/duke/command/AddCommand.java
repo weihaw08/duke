@@ -1,15 +1,16 @@
 package duke.command;
 
-import java.text.ParseException;
+import duke.exception.InvalidTimeAndDateException;
+import duke.functionality.Storage;
 import duke.functionality.TaskList;
 import duke.functionality.Ui;
-import duke.functionality.Storage;
-import duke.exception.InvalidTimeAndDateException;
-import duke.tasks.FormattedDate;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.FormattedDate;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+
+import java.text.ParseException;
 
 public class AddCommand extends Command {
 
@@ -17,6 +18,12 @@ public class AddCommand extends Command {
         super(addCommand);
     }
 
+    /**
+     * Executes the add command in the {@code AddCommand} object.
+     * @param taskList the {@code TaskList} object in Duke
+     * @param ui the {@code Ui} object in Duke
+     * @param storage the {@code Storage} object in Duke
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String[] tokens = this.command.split(" ");
         Task newTask = null;

@@ -1,9 +1,10 @@
 package duke.command;
 
-import java.io.IOException;
+import duke.functionality.Storage;
 import duke.functionality.TaskList;
 import duke.functionality.Ui;
-import duke.functionality.Storage;
+
+import java.io.IOException;
 
 
 public class ByeCommand extends Command {
@@ -12,6 +13,12 @@ public class ByeCommand extends Command {
         super(byeCommand);
     }
 
+    /**
+     * Executes the bye command in the {@code ByeCommand} object.
+     * @param taskList the {@code TaskList} object in Duke
+     * @param ui the {@code Ui} object in Duke
+     * @param storage the {@code Storage} object in Duke
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             ui.printByeMessage();

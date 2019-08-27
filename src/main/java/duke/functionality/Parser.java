@@ -84,6 +84,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and creates the relevant {@code Command} object if the command is valid.
+     * @return a relevant {@code Command} object
+     * @throws WrongInstructionException if the command given is not recognised
+     * @throws EmptyDescriptionException if the command given is recognised but incomplete
+     */
     public Command parse() throws WrongInstructionException, EmptyDescriptionException {
         if (!isValidInstruction(tokens[0])) {
             throw new WrongInstructionException();

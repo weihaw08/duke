@@ -1,15 +1,16 @@
 package duke.functionality;
 
 import duke.exception.InvalidTimeAndDateException;
-import duke.tasks.FormattedDate;
-import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.FormattedDate;
+import duke.tasks.Task;
 import duke.tasks.ToDo;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,6 +19,10 @@ public class Storage {
     private File tasktext;
     private String filePath;
 
+    /**
+     * Instantiates a {@code Storage} object.
+     * @param filePath the path of the input text file
+     */
     public Storage(String filePath) {
         try {
             this.tasktext = new File(filePath);
@@ -31,6 +36,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads an {@code ArrayList} object with the {@code Task} objects that are saved inside the text file.
+     * @return an {@code ArrayList} object containing {@code Task} objects.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> initialisedList = new ArrayList<>();
         try {
@@ -50,7 +59,7 @@ public class Storage {
 
     private Task processLine(String line) throws ParseException, InvalidTimeAndDateException {
         String[] tokens = line.split(" ~ ");
-        boolean isDone = Boolean.valueOf(tokens[1]);
+        boolean isDone = Boolean.parseBoolean(tokens[1]);
         if (tokens[0].equals("T")) {
             return new ToDo(tokens[2], isDone);
         } else if (tokens[0].equals("E")) {
@@ -64,6 +73,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the {@code Task} objects in the input {@code ArrayList} object into a text file.
+     * @param list an {@code ArrayList} object containing {@code Task} objects
+     * @throws IOException if there is no file found in the input path
+     */
     public void save(ArrayList<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : list) {

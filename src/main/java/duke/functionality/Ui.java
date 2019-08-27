@@ -25,6 +25,9 @@ public class Ui {
         System.out.printf(formatting, msg);
     }
 
+    /**
+     * Prints a hello message when Duke is initialised.
+     */
     public void printHelloMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -38,6 +41,9 @@ public class Ui {
         printBorder();
     }
 
+    /**
+     * Prints a bye message when the user wishes to exit from Duke.
+     */
     public void printByeMessage() {
         printBorder();
         this.isBye = true;
@@ -53,6 +59,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out the modification that has been done to a {@code Task} object.
+     * @param size the size of the {@code TaskList} object in Duke
+     * @param modifiedTask the {@code Task} object that has been modified
+     * @param modification the modification done to the {@code Task} object
+     */
     public void printTaskModification(int size, Task modifiedTask, String modification) {
         String messageToPrint;
         boolean isListModified;

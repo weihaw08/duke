@@ -17,6 +17,12 @@ public class TaskList {
         this.list.add(newTask);
     }
 
+    /**
+     * Removes a {@code Task} object from the task list at the given index.
+     * @param index the index of the {@code Task} object that is to be removed.
+     * @throws EmptyListException if the list is empty
+     * @throws IndexNotFoundException if there are not {@code Task} objects found in the given index.
+     */
     public void deleteTask(int index) throws EmptyListException, IndexNotFoundException {
         if (this.list.isEmpty()) {
             throw new EmptyListException();
@@ -27,6 +33,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieves the {@code Task} object from the task list at the given index.
+     * @param index the index of the {@code Task} object that is to be retrieved
+     * @return the {@code Task} object at the given index
+     * @throws EmptyListException if the list is empty
+     * @throws IndexNotFoundException if there are not {@code Task} objects found in the given index
+     */
     public Task retrieveTask(int index) throws EmptyListException, IndexNotFoundException {
         if (this.list.isEmpty()) {
             throw new EmptyListException();

@@ -2,19 +2,33 @@ package duke.functionality;
 
 import duke.tasks.Task;
 
+/**
+ * Represents the various user interface features that the user will see while using Duke. This class provides features
+ * such as printing messages and beautifying the user interface for Duke.
+ */
 public class Ui {
     private static final String BORDER = "____________________________________________________________________";
     private static final int USUAL_INDENTATION = 5;
     private boolean isBye;
 
+    /**
+     * Instantiates a {@code Ui} object.
+     */
     public Ui() {
         this.isBye = false;
     }
 
+    /**
+     * Prints a border line that will help to separate consecutive outputs.
+     */
     public void printBorder() {
         printMessage(BORDER, 4);
     }
 
+    /**
+     * Prints a message that has a fixed left indentation (5 white spaces).
+     * @param msg the message to be printed
+     */
     public void printMessage(String msg) {
         printMessage(msg, USUAL_INDENTATION);
     }
@@ -25,6 +39,9 @@ public class Ui {
         System.out.printf(formatting, msg);
     }
 
+    /**
+     * Prints the hello message when Duke is initialised.
+     */
     public void printHelloMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -38,6 +55,9 @@ public class Ui {
         printBorder();
     }
 
+    /**
+     * Prints the bye message when the user inputs the "bye" command.
+     */
     public void printByeMessage() {
         printBorder();
         this.isBye = true;
@@ -53,6 +73,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Notifies the user about the changes that have been made to a task or a task list.
+     * @param size the size of the {@code TaskList}
+     * @param modifiedTask the {@code Task} object that has been modified
+     * @param modification the type of modification: "done", "add", "delete"
+     */
     public void printTaskModification(int size, Task modifiedTask, String modification) {
         String messageToPrint;
         boolean isListModified;
@@ -73,6 +99,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Checks if the user has given the "bye" command.
+     * @return {@code true} if the user has given the "bye" command and {@code false} if otherwise
+     */
     public boolean isBye() {
         return this.isBye;
     }

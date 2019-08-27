@@ -9,11 +9,18 @@ import duke.command.ListCommand;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongInstructionException;
 
-
+/**
+ * Represents a command parser that interprets a command. The {@code Parser} object creates a new {@code Command}
+ * object if the command that it is fed with is a valid command.
+ */
 public class Parser {
     private String[] tokens;
     private String command;
 
+    /**
+     * Instantiates a {@code Parser} object.
+     * @param command an input command
+     */
     public Parser(String command) {
         this.tokens = command.split(" ");
         this.command = command;
@@ -84,6 +91,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Interprets the command stored in the {@code Parser} instance and produces an output if the command is valid.
+     * @return a {@code Command} object representing the command the {@code Parser} is fed with.
+     * @throws WrongInstructionException if the command fed to the {@code Parser} object is invalid
+     * @throws EmptyDescriptionException if the command fed to the {@code Parser} object is correct but incomplete.
+     */
     public Command parse() throws WrongInstructionException, EmptyDescriptionException {
         if (!isValidInstruction(tokens[0])) {
             throw new WrongInstructionException();

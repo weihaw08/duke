@@ -4,12 +4,13 @@ public abstract class Task {
     String taskName;
     boolean isDone;
 
-    public Task(String taskName) {
+
+    Task(String taskName) {
         this.taskName = taskName;
         isDone = false;
     }
 
-    public Task(String taskName, boolean isDone) {
+    Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }

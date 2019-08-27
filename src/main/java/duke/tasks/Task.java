@@ -15,6 +15,14 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Retrieves the task name of the {@code Task} object.
+     * @return the task name of the {@code Task} object
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.functionality.Storage;
 import duke.functionality.TaskList;
 import duke.functionality.Ui;
-import duke.functionality.Storage;
+
 
 public abstract class Command {
     String command;

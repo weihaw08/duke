@@ -1,23 +1,32 @@
 package duke.functionality;
 
 import duke.exception.InvalidTimeAndDateException;
-import duke.tasks.FormattedDate;
-import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.FormattedDate;
+import duke.tasks.Task;
 import duke.tasks.ToDo;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage system of Duke. A {@code Storage} object helps to load the previously stored text file in
+ * Duke and saves the updates that have been made.
+ */
 public class Storage {
     private File tasktext;
     private String filePath;
 
+    /**
+     * Instantiates a {@code Storage} object. A new directory and file is created if the file has yet to be created.
+     * @param filePath the path of the file
+     */
     public Storage(String filePath) {
         try {
             this.tasktext = new File(filePath);
@@ -31,6 +40,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialises the list of items that have been stored in the text file of the {@code Storage} instance.
+     * @return an {@code ArrayList} of {@code Task} objects that are stored in text format in the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> initialisedList = new ArrayList<>();
         try {
@@ -50,7 +63,7 @@ public class Storage {
 
     private Task processLine(String line) throws ParseException, InvalidTimeAndDateException {
         String[] tokens = line.split(" ~ ");
-        boolean isDone = Boolean.valueOf(tokens[1]);
+        boolean isDone = Boolean.parseBoolean(tokens[1]);
         if (tokens[0].equals("T")) {
             return new ToDo(tokens[2], isDone);
         } else if (tokens[0].equals("E")) {
@@ -64,11 +77,19 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> list) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : list) {
-            fw.write(task.convertToText() + "\n");
+    /**
+     * Saves the {@code Task} objects that are stored in the list in text format.
+     * @param list an {@code ArrayList} of {@code Task} objects
+     */
+    public void save(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (Task task : list) {
+                fw.write(task.convertToText() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Unable to find Duke's memory location!");
         }
-        fw.close();
     }
 }

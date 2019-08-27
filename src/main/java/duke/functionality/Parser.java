@@ -5,6 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongInstructionException;
@@ -46,9 +47,13 @@ public class Parser {
         return command.equals("bye");
     }
 
+    private boolean isFindCommand(String command) {
+        return command.equals("find");
+    }
+
     private boolean isValidInstruction(String instruction) {
         return isAddCommand(instruction) || isDeleteCommand(instruction) || isDoneCommand(instruction)
-                || isListCommand(instruction) || isByeCommand(instruction);
+                || isListCommand(instruction) || isByeCommand(instruction) || isFindCommand(instruction);
     }
 
     private AddCommand createAddCommand() throws EmptyDescriptionException {
@@ -91,6 +96,10 @@ public class Parser {
         }
     }
 
+    private FindCommand createFindCommand() {
+        return new FindCommand(command);
+    }
+
     /**
      * Interprets the command stored in the {@code Parser} instance and produces an output if the command is valid.
      * @return a {@code Command} object representing the command the {@code Parser} is fed with.
@@ -108,8 +117,10 @@ public class Parser {
             return createDoneCommand();
         } else if (isListCommand(tokens[0])) {
             return createListCommand();
-        } else {
+        } else if (isByeCommand(tokens[0])) {
             return createByeCommand();
+        } else {
+            return createFindCommand();
         }
     }
 

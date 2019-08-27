@@ -42,7 +42,8 @@ public class FindCommand extends Command {
                         ui.printMessage("It's a match!");
                         isFound = true;
                     }
-                    ui.printMessage(i + ". " + task.toString());
+                    count++;
+                    ui.printMessage(count + ". " + task.toString());
                 }
             }
             if (!isFound) {

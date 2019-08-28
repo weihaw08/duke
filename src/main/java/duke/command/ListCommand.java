@@ -33,7 +33,8 @@ public class ListCommand extends Command {
         String msg;
         int size = taskList.size();
         if (size <= 5) {
-            msg = "<(^.^<) You must be quite free! You only have " + size + " tasks!";
+            String pluralOrNot = (size == 1) ? "task" : "tasks";
+            msg = "<(^.^<) You must be quite free! You only have " + size + " " + pluralOrNot + "!";
         } else if (size <= 10) {
             msg = "O.O\" You are quite busy! You have " + size + " tasks!";
         } else {

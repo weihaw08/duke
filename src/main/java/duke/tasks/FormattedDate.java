@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Helps to determine if a date is valid and represents a date in the standardised format "dd/mm/yyyy hhmm".
  */
-public class FormattedDate {
+public class FormattedDate implements Comparable<FormattedDate> {
     private Date date;
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
@@ -25,7 +25,7 @@ public class FormattedDate {
         String[] tokens = s.split(" ");
         Date currentDate = new Date();
         if (!isValidDate(tokens[0]) || !isValidTime(tokens[1]) || this.date.before(currentDate)) {
-            throw new InvalidTimeAndDateException();
+            throw new InvalidTimeAndDateException(s);
         }
     }
 
@@ -50,5 +50,10 @@ public class FormattedDate {
     @Override
     public String toString() {
         return FORMAT.format(this.date);
+    }
+
+    @Override
+    public int compareTo(FormattedDate anotherDate) {
+        return this.date.compareTo(anotherDate.date);
     }
 }

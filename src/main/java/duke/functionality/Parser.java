@@ -57,7 +57,7 @@ public class Parser {
     }
 
     private AddCommand createAddCommand() throws EmptyDescriptionException {
-        if (tokens.length == 1) {
+        if (tokens.length == 1 || tokens[1].equals("/by") || tokens[1].equals("/at")) {
             throw new EmptyDescriptionException(tokens[0]);
         } else {
             return new AddCommand(command);

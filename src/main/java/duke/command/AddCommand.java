@@ -57,6 +57,9 @@ public class AddCommand extends Command {
                 String[] startAndEnd = splitEvent[1].split(" - ");
                 FormattedDate start = new FormattedDate(startAndEnd[0]);
                 FormattedDate end = new FormattedDate(startAndEnd[1]);
+                if (start.compareTo(end) > 0) {
+                    throw new InvalidTimeAndDateException(startAndEnd[0] + " - " + startAndEnd[1]);
+                }
                 newTask = new Event(splitEvent[0], start, end);
             }
         } catch (ParseException e) {
@@ -64,6 +67,7 @@ public class AddCommand extends Command {
             ui.printMessage("\"dd/mm/yyyy hhmm\"!");
         } catch (InvalidTimeAndDateException e) {
             ui.printMessage(e.toString());
+            ui.printMessage(e.getMessage());
         } finally {
             if (newTask != null) {
                 taskList.addTask(newTask);

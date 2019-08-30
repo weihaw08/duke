@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Instantiates a {@code Storage} object. A new directory and file is created if the file has yet to be created.
+     *
      * @param filePath the path of the file
      */
     public Storage(String filePath) {
@@ -42,6 +43,7 @@ public class Storage {
 
     /**
      * Initialises the list of items that have been stored in the text file of the {@code Storage} instance.
+     *
      * @return an {@code ArrayList} of {@code Task} objects that are stored in text format in the file.
      */
     public ArrayList<Task> load() {
@@ -79,6 +81,7 @@ public class Storage {
 
     /**
      * Saves the {@code Task} objects that are stored in the list in text format.
+     *
      * @param list an {@code ArrayList} of {@code Task} objects
      */
     public void save(ArrayList<Task> list) {

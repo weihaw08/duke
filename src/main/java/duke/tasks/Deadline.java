@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Instantiates a {@code Deadline} object.
+     *
      * @param taskName the name of the task
      * @param deadline the time in which the task is due
      */
@@ -19,8 +20,9 @@ public class Deadline extends Task {
 
     /**
      * Instantiates a {@code Deadline} object. The user is allowed to set if the task has been completed or not.
+     *
      * @param taskName the name of the task
-     * @param isDone the state of the task
+     * @param isDone   the state of the task
      * @param deadline the time in which the task is due
      */
     public Deadline(String taskName, boolean isDone, FormattedDate deadline) {
@@ -36,6 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a text version of the {@code Deadline} task. This text version is stored in a text file.
+     *
      * @return a string that represents the state, the name and the deadline of the {@code Deadline} task.
      */
     @Override

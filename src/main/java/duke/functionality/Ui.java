@@ -7,7 +7,7 @@ import duke.tasks.Task;
  * such as printing messages and beautifying the user interface for Duke.
  */
 public class Ui {
-    private static final String BORDER = "____________________________________________________________________";
+    private static final String BORDER = "_______________________________________________________________________";
     private static final int USUAL_INDENTATION = 5;
     private boolean isBye;
 
@@ -27,6 +27,7 @@ public class Ui {
 
     /**
      * Prints a message that has a fixed left indentation (5 white spaces).
+     *
      * @param msg the message to be printed
      */
     public void printMessage(String msg) {
@@ -59,10 +60,8 @@ public class Ui {
      * Prints the bye message when the user inputs the "bye" command.
      */
     public void printByeMessage() {
-        printBorder();
         this.isBye = true;
         printMessage("Bye. Hope to see you again soon!");
-        printBorder();
     }
 
     private void printListSize(int size) {
@@ -75,7 +74,8 @@ public class Ui {
 
     /**
      * Notifies the user about the changes that have been made to a task or a task list.
-     * @param size the size of the {@code TaskList}
+     *
+     * @param size         the size of the {@code TaskList}
      * @param modifiedTask the {@code Task} object that has been modified
      * @param modification the type of modification: "done", "add", "delete"
      */
@@ -101,6 +101,7 @@ public class Ui {
 
     /**
      * Checks if the user has given the "bye" command.
+     *
      * @return {@code true} if the user has given the "bye" command and {@code false} if otherwise
      */
     public boolean isBye() {

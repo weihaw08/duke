@@ -10,9 +10,10 @@ public class Event extends Task {
 
     /**
      * Instantiates an {@code Event} object.
+     *
      * @param taskName the name of the task
-     * @param start the start date of the task
-     * @param end the end date of the task
+     * @param start    the start date of the task
+     * @param end      the end date of the task
      */
     public Event(String taskName, FormattedDate start, FormattedDate end) {
         super(taskName);
@@ -22,10 +23,11 @@ public class Event extends Task {
 
     /**
      * Instantiates an {@code Event} object. The user is allowed to set if the task has been completed or not.
+     *
      * @param taskName the name of the task
-     * @param isDone the state of the task
-     * @param start the start date of the task
-     * @param end the end date of the task
+     * @param isDone   the state of the task
+     * @param start    the start date of the task
+     * @param end      the end date of the task
      */
     public Event(String taskName, boolean isDone, FormattedDate start, FormattedDate end) {
         super(taskName, isDone);
@@ -41,8 +43,9 @@ public class Event extends Task {
 
     /**
      * Creates a text version of the {@code Event} task. This text version is stored in a text file.
+     *
      * @return a string that represents the state, the name, the start date and the end date of the
-     *         {@code Deadline} task.
+     * {@code Deadline} task.
      */
     @Override
     public String convertToText() {

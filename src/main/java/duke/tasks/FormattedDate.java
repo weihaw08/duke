@@ -16,15 +16,16 @@ public class FormattedDate implements Comparable<FormattedDate> {
 
     /**
      * Instantiates a {@code FormattedDate} object.
+     *
      * @param s a string that could possibly represent a date in the format "dd/mm/yyyy hhmm"
-     * @throws ParseException if the string is not a date or is not in the "dd/mm/yyyy hhmm" format
+     * @throws ParseException              if the string is not a date or is not in the "dd/mm/yyyy hhmm" format
      * @throws InvalidTimeAndDateException if the date and time is not in an official time system
      */
     public FormattedDate(String s) throws ParseException, InvalidTimeAndDateException {
         this.date = FORMAT.parse(s);
         String[] tokens = s.split(" ");
         Date currentDate = new Date();
-        if (!isValidDate(tokens[0]) || !isValidTime(tokens[1]) || this.date.before(currentDate)) {
+        if (!isValidDate(tokens[0]) || !isValidTime(tokens[1])) {
             throw new InvalidTimeAndDateException(s);
         }
     }

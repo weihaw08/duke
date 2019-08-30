@@ -17,6 +17,7 @@ public abstract class Task {
 
     /**
      * Retrieves the task name of the {@code Task} object.
+     *
      * @return the task name of the {@code Task} object
      */
     public String getTaskName() {

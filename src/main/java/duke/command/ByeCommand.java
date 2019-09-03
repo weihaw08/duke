@@ -16,9 +16,10 @@ public class ByeCommand extends Command {
      * @param taskList the {@code TaskList} object in Duke
      * @param ui       the {@code Ui} object in Duke
      * @param storage  the {@code Storage} object in Duke
+     * @return a string representing the bye message of Duke
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printByeMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         storage.save(taskList.obtainList());
+        return ui.giveBye();
     }
 }

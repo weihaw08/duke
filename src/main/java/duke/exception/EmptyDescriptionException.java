@@ -9,6 +9,6 @@ public class EmptyDescriptionException extends Exception {
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! The description of a " + this.taskType + " cannot be empty.";
+        return "o_O OOPS!!! The description of a " + this.taskType + " cannot be empty.";
     }
 }

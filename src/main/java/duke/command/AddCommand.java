@@ -18,6 +18,7 @@ public class AddCommand extends Command {
     private FormattedDate date2;
 
     private AddCommand(String taskName, FormattedDate date1, FormattedDate date2) {
+        super();
         this.taskName = taskName;
         this.date1 = date1;
         this.date2 = date2;
@@ -48,8 +49,9 @@ public class AddCommand extends Command {
      * @param taskList the {@code TaskList} object in Duke
      * @param ui       the {@code Ui} object in Duke
      * @param storage  the {@code Storage} object in Duke
+     * @return a string containing the information of the task that has been added
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
         if (date1 == null && date2 == null) {
             newTask = new ToDo(taskName);
@@ -59,6 +61,6 @@ public class AddCommand extends Command {
             newTask = new Event(taskName, date1, date2);
         }
         taskList.addTask(newTask);
-        ui.printTaskModification(taskList.size(), newTask, "add");
+        return ui.printTaskModification(taskList.size(), newTask, "add");
     }
 }

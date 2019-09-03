@@ -32,7 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String sym = this.isDone ? "✓" : "✗";
+        String sym = this.isDone ? "Done" : "Not Done";
         return "[D]" + "[" + sym + "] " + this.taskName + " (by: " + this.deadline + ")";
     }
 
@@ -43,6 +43,7 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToText() {
-        return "D" + " ~ " + this.isDone + " ~ " + this.taskName + " ~ " + this.deadline;
+        return "D" + " ~ " + this.isDone + " ~ " + this.taskName
+            + " ~ " + this.deadline;
     }
 }

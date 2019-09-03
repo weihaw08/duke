@@ -3,72 +3,31 @@ package duke.functionality;
 import duke.tasks.Task;
 
 /**
- * Represents the various user interface features that the user will see while using Duke. This class provides features
- * such as printing messages and beautifying the user interface for Duke.
+ * Represents the various user interface features that the user will see while using Duke.
  */
 public class Ui {
-    private static final String BORDER = "_______________________________________________________________________";
-    private static final int USUAL_INDENTATION = 5;
-    private boolean isBye;
 
     /**
-     * Instantiates a {@code Ui} object.
+     * Gives the welcoming greeting from Duke.
+     * @return a string representing the hello message from Duke
      */
-    public Ui() {
-        this.isBye = false;
+    public String giveHelloMessage() {
+        return "Hello from Duke!!\nWhat can I do for you?";
     }
 
     /**
-     * Prints a border line that will help to separate consecutive outputs.
+     * Gives the farewell message from Duke.
+     * @return a string representing the goodbye message from Duke
      */
-    public void printBorder() {
-        printMessage(BORDER, 4);
+    public String giveBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Prints a message that has a fixed left indentation (5 white spaces).
-     *
-     * @param msg the message to be printed
-     */
-    public void printMessage(String msg) {
-        printMessage(msg, USUAL_INDENTATION);
-    }
-
-    private void printMessage(String msg, int indentation) {
-        int rightShift = indentation + msg.length();
-        String formatting = "%" + rightShift + "s %n";
-        System.out.printf(formatting, msg);
-    }
-
-    /**
-     * Prints the hello message when Duke is initialised.
-     */
-    public void printHelloMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printBorder();
-        printMessage("Hello! I'm Duke");
-        printMessage("What can I do for you?");
-        printBorder();
-    }
-
-    /**
-     * Prints the bye message when the user inputs the "bye" command.
-     */
-    public void printByeMessage() {
-        this.isBye = true;
-        printMessage("Bye. Hope to see you again soon!");
-    }
-
-    private void printListSize(int size) {
+    private String listSizeToString(int size) {
         if (size == 1) {
-            printMessage("Now you have 1 task in the list.");
+            return "Now you have 1 task in the list.";
         } else {
-            printMessage("Now you have " + size + " tasks in the list.");
+            return "Now you have " + size + " tasks in the list.";
         }
     }
 
@@ -78,34 +37,46 @@ public class Ui {
      * @param size         the size of the {@code TaskList}
      * @param modifiedTask the {@code Task} object that has been modified
      * @param modification the type of modification: "done", "add", "delete"
+     * @return a string representing the information of the modification that has been carried out
      */
-    public void printTaskModification(int size, Task modifiedTask, String modification) {
-        String messageToPrint;
+    public String printTaskModification(int size, Task modifiedTask, String modification) {
+        String message;
         boolean isListModified;
         if (modification.equals("add")) {
-            messageToPrint = "UWU. A task has been added:";
+            message = "UWU. A task has been added:";
             isListModified = true;
         } else if (modification.equals("delete")) {
-            messageToPrint = "OWO. A task has been removed:";
+            message = "OWO. A task has been removed:";
             isListModified = true;
         } else {
-            messageToPrint = "^W^. A task has been marked done:";
+            message = "^W^. A task has been marked done:";
             isListModified = false;
         }
-        printMessage(messageToPrint);
-        printMessage(modifiedTask.toString(), 7);
+        message += "\n  " + modifiedTask.toString() + "\n";
         if (isListModified) {
-            printListSize(size);
+            message += listSizeToString(size);
         }
+        return message;
     }
 
-    /**
-     * Checks if the user has given the "bye" command.
-     *
-     * @return {@code true} if the user has given the "bye" command and {@code false} if otherwise
-     */
-    public boolean isBye() {
-        return this.isBye;
+
+    public String getIndexNotFoundMessage(int index) {
+        return "O_O The index " + index + " cannot be found!";
+    }
+
+
+    public String getEmptyListMessage() {
+        return "O_O Your task list is completely empty!";
+    }
+
+
+    public String getInvalidDateFormatMessage() {
+        return "Please enter your date in \"dd/mm/yyyy hhmm\" format!";
+    }
+
+
+    public String getInvalidIndexMessage() {
+        return "Your task index is not a number!\n Make sure your task index is an integer!";
     }
 
 }

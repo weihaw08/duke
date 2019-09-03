@@ -56,7 +56,7 @@ public class Parser {
             if (tokens.length == 1 || tokens[1].equals("/by")) {
                 throw new EmptyDescriptionException("deadline");
             } else if (!this.command.contains("/by")) {
-                throw new WrongInstructionException("I only recognise \"deadline <task name> /by <date>\"!");
+                throw new WrongInstructionException("I only recognise \"deadline task_name /by date\"!");
             } else {
                 String modifiedCommand = this.command.replace("deadline", "");
                 String[] split = modifiedCommand.split(" /by ");
@@ -67,15 +67,15 @@ public class Parser {
             if (tokens.length == 1 || tokens[1].equals("/at")) {
                 throw new EmptyDescriptionException("event");
             } else if (!this.command.contains("/at")) {
-                throw new WrongInstructionException("I only recognise \"event <task name> /at <start date> "
-                        + "- <end date>\"!");
+                throw new WrongInstructionException("I only recognise \"event task_name /at start_date "
+                        + "- end_date\"!");
             } else {
                 String modifiedCommand = this.command.replace("event", "");
                 String[] split = modifiedCommand.split(" /at ");
                 String[] splitDates = split[1].split(" - ");
                 if (splitDates.length != 2) {
-                    throw new WrongInstructionException("I only recognise \"event <event name> /at <start date> "
-                            + "- <end date>\"!");
+                    throw new WrongInstructionException("I only recognise \"event event_name /at start_date "
+                            + "- end_date\"!");
                 } else {
                     FormattedDate start = new FormattedDate(splitDates[0]);
                     FormattedDate end = new FormattedDate(splitDates[1]);
@@ -93,7 +93,7 @@ public class Parser {
             }
         case "delete":
             if (tokens.length > 2) {
-                throw new WrongInstructionException("Make me delete tasks by entering \"delete <index>\"!");
+                throw new WrongInstructionException("Make me delete tasks by entering \"delete index\"!");
             } else if (tokens.length == 1) {
                 throw new EmptyDescriptionException("delete");
             } else {
@@ -102,7 +102,7 @@ public class Parser {
             }
         case "done":
             if (tokens.length > 2) {
-                throw new WrongInstructionException("Make me mark a task as done by entering \"done <index>\"!");
+                throw new WrongInstructionException("Make me mark a task as done by entering \"done index\"!");
             } else if (tokens.length == 1) {
                 throw new EmptyDescriptionException("done");
             } else {
@@ -123,7 +123,7 @@ public class Parser {
                 return new ListCommand();
             }
         default:
-            throw new WrongInstructionException("Please stick to the list of commands that I know! HMMPH!");
+            throw new WrongInstructionException("Please stick to the list of commands that I know!");
         }
     }
 }

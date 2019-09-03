@@ -27,17 +27,19 @@ public class DoneCommand extends Command {
      * @param taskList the {@code TaskList} object in Duke
      * @param ui       the {@code Ui} object in Duke
      * @param storage  the {@code Storage} object in Duke
+     * @return a string representing the information of the task that has been marked as done or a string representing
+     *     the exception encountered
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task completedTask = taskList.retrieveTask(indexToComplete);
             completedTask.markAsDone();
-            ui.printTaskModification(taskList.size(), completedTask, "done");
+            return ui.printTaskModification(taskList.size(), completedTask, "done");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {
-                ui.printMessage("O_O Your task list is completely empty!");
+                return ui.getEmptyListMessage();
             } else {
-                ui.printMessage("O_O The index " + indexToComplete + " cannot be found!");
+                return ui.getIndexNotFoundMessage(indexToComplete);
             }
         }
     }

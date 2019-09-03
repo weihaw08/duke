@@ -27,23 +27,26 @@ public class FindCommand extends Command {
      * @param taskList the {@code TaskList} object in Duke
      * @param ui       the {@code Ui} object in Duke
      * @param storage  the {@code Storage} object in Duke
+     * @return a string containing the possible matches that are found in the task list
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         boolean isFound = false;
         int count = 0;
+        StringBuilder message = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.retrieveTask(i);
             if (task.getTaskName().contains(keyword)) {
                 if (!isFound) {
-                    ui.printMessage("It's a match!");
+                    message.append("It's a match!\n");
                     isFound = true;
                 }
                 count++;
-                ui.printMessage(count + ". " + task.toString());
+                message.append(count).append(". ").append(task.toString()).append("\n");
             }
         }
         if (!isFound) {
-            ui.printMessage("UwU\" No matches found. Please try again.");
+            message = new StringBuilder("UwU\" No matches found. Please try again.");
         }
+        return message.toString();
     }
 }

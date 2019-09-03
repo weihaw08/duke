@@ -10,29 +10,30 @@ import duke.functionality.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Executes the list command that the {@code ListCommand} object represents. This will prompt Duke to print out all
-     * of the current tasks in the {@code TaskList} object.
+     * Executes the command represented by the {@code ListCommand} object.
      *
      * @param taskList the {@code TaskList} object in Duke
      * @param ui       the {@code Ui} object in Duke
      * @param storage  the {@code Storage} object in Duke
+     * @return a string representing the tasks inside taskList
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String msg;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        StringBuilder msg;
         int size = taskList.size();
         if (size == 0) {
-            msg = "HOORAY!! FREE SPIRIT!! You have no tasks!!";
+            msg = new StringBuilder("HOORAY!! FREE SPIRIT!! You have no tasks!!\n");
         } else if (size <= 5) {
             String pluralOrNot = (size == 1) ? "task" : "tasks";
-            msg = "<(^.^<) You must be quite free! You only have " + size + " " + pluralOrNot + "!";
+            msg = new StringBuilder("<(^.^<) You must be quite free! You only have " + size + " "
+                + pluralOrNot + "!\n");
         } else if (size <= 10) {
-            msg = "O.O\" You are quite busy! You have " + size + " tasks!";
+            msg = new StringBuilder("O.O\" You are quite busy! You have " + size + " tasks!\n");
         } else {
-            msg = "T_T Please don't be stressed over your " + size + " tasks!";
+            msg = new StringBuilder("T_T Please don't be stressed over your " + size + " tasks!\n");
         }
-        ui.printMessage(msg);
         for (int i = 1; i <= size; i++) {
-            ui.printMessage(i + ". " + taskList.retrieveTask(i));
+            msg.append(i).append(". ").append(taskList.retrieveTask(i)).append("\n");
         }
+        return msg.toString();
     }
 }

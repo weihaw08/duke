@@ -56,6 +56,7 @@ public class Ui {
         if (isListModified) {
             message += listSizeToString(size);
         }
+        assert !message.equals("");
         return message;
     }
 

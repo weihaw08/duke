@@ -113,7 +113,7 @@ public class Parser {
             if (tokens.length == 1) {
                 throw new EmptyDescriptionException("find");
             } else {
-                String modifiedCommand = this.command.replace("find", "");
+                String modifiedCommand = this.command.replace("find ", "");
                 return new FindCommand(modifiedCommand);
             }
         case "list":

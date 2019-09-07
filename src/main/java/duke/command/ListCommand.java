@@ -32,6 +32,7 @@ public class ListCommand extends Command {
             msg = new StringBuilder("T_T Please don't be stressed over your " + size + " tasks!\n");
         }
         for (int i = 1; i <= size; i++) {
+            assert taskList.size() != 0;
             msg.append(i).append(". ").append(taskList.retrieveTask(i)).append("\n");
         }
         return msg.toString();

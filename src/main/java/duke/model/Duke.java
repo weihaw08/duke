@@ -1,11 +1,12 @@
+package duke.model;
+
 import duke.command.Command;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTimeAndDateException;
 import duke.exception.WrongInstructionException;
-import duke.functionality.Parser;
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 import java.text.ParseException;
 
@@ -24,16 +25,16 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    String sayHi() {
+    public String sayHi() {
         return ui.giveHelloMessage();
     }
 
     /**
      * Retrieves the relevant response from Duke based on the input command.
      * @param command the input response of the user
-     * @return a string representing the response from Duke
+     * @return a string representing the response from duke.model.Duke
      */
-    String getResponse(String command) {
+    public String getResponse(String command) {
         try {
             Command processed = new Parser(command).parse();
             return processed.execute(taskList, ui, storage);

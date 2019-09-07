@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a command that informs Duke that a particular task has been completed.

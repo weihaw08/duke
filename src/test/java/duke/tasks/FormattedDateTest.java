@@ -27,7 +27,7 @@ class FormattedDateTest {
         try {
             new FormattedDate(s);
         } catch (InvalidTimeAndDateException e) {
-            assertEquals("☹ OOPS!!! You are breaking the space-time continuum!", e.toString());
+            assertEquals("o_O OOPS!!! You are breaking the space-time continuum!", e.toString());
         }
     }
 

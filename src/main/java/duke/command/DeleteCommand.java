@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * Represents the command that will instruct Duke to delete a {@code Task} object from the {@code TaskList} object.

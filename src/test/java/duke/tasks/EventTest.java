@@ -14,11 +14,11 @@ class EventTest {
         // Testing string conversion for constructor 1
         FormattedDateStub date = new FormattedDateStub("s");
         Event e1 = new Event("project meeting", date, date);
-        assertEquals("[E][✗] project meeting (at: 20/10/3999 2345 - 20/10/3999 2345)", e1.toString());
+        assertEquals("[E][Not Done] project meeting (at: 20/10/3999 2345 - 20/10/3999 2345)", e1.toString());
 
         // Testing string conversion for constructor 2
         Event e2 = new Event("sleep", true, date, date);
-        assertEquals("[E][✓] sleep (at: 20/10/3999 2345 - 20/10/3999 2345)", e2.toString());
+        assertEquals("[E][Done] sleep (at: 20/10/3999 2345 - 20/10/3999 2345)", e2.toString());
     }
 
     @Test
@@ -26,7 +26,7 @@ class EventTest {
         FormattedDateStub date = new FormattedDateStub("s");
         Event e1 = new Event("project meeting", date, date);
         e1.markAsDone();
-        assertEquals("[E][✓] project meeting (at: 20/10/3999 2345 - 20/10/3999 2345)", e1.toString());
+        assertEquals("[E][Done] project meeting (at: 20/10/3999 2345 - 20/10/3999 2345)", e1.toString());
     }
 
     @Test

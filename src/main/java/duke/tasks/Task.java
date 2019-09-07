@@ -28,7 +28,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract String toString();
+    public String toString() {
+        String sym = this.isDone ? "Done" : "Not Done";
+        return "[" + sym + "] " + this.taskName;
+    }
 
     public abstract String convertToText();
 }

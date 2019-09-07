@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents the command that will bid Duke goodbye.

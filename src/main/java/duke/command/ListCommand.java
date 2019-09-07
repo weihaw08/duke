@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents the command that instructs Duke to print out the current tasks that are inside the task list.
@@ -20,16 +20,11 @@ public class ListCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         StringBuilder msg;
         int size = taskList.size();
-        if (size == 0) {
-            msg = new StringBuilder("HOORAY!! FREE SPIRIT!! You have no tasks!!\n");
-        } else if (size <= 5) {
+        if (size <= 5) {
             String pluralOrNot = (size == 1) ? "task" : "tasks";
-            msg = new StringBuilder("<(^.^<) You must be quite free! You only have " + size + " "
-                + pluralOrNot + "!\n");
-        } else if (size <= 10) {
-            msg = new StringBuilder("O.O\" You are quite busy! You have " + size + " tasks!\n");
+            msg = new StringBuilder("<(^.^<) You must be quite free! You have " + size + " " + pluralOrNot + "!\n");
         } else {
-            msg = new StringBuilder("T_T Please don't be stressed over your " + size + " tasks!\n");
+            msg = new StringBuilder("O.O\" You are quite busy! You have " + size + " tasks!\n");
         }
         for (int i = 1; i <= size; i++) {
             msg.append(i).append(". ").append(taskList.retrieveTask(i)).append("\n");

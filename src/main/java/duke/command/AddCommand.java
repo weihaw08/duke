@@ -52,7 +52,6 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
-        assert taskName != null;
         if (date1 == null && date2 == null) {
             newTask = new ToDo(taskName);
         } else if (date2 == null) {

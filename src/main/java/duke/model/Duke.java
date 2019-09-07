@@ -37,6 +37,7 @@ public class Duke {
     public String getResponse(String command) {
         try {
             Command processed = new Parser(command).parse();
+            assert processed != null;
             return processed.execute(taskList, ui, storage);
         } catch (WrongInstructionException | InvalidTimeAndDateException e) {
             return e.toString() + "\n" + e.getMessage();

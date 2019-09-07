@@ -33,6 +33,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task toBeRemoved = taskList.retrieveTask(indexToRemove);
+            assert toBeRemoved != null;
             taskList.deleteTask(indexToRemove);
             return ui.printTaskModification(taskList.size(), toBeRemoved, "delete");
         } catch (IndexOutOfBoundsException e) {

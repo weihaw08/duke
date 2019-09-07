@@ -33,6 +33,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task completedTask = taskList.retrieveTask(indexToComplete);
+            assert completedTask != null;
             completedTask.markAsDone();
             return ui.printTaskModification(taskList.size(), completedTask, "done");
         } catch (IndexOutOfBoundsException e) {

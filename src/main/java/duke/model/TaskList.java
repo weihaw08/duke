@@ -26,6 +26,7 @@ public class TaskList {
      * @param newTask a {@code Task} object
      */
     public void addTask(Task newTask) {
+        assert newTask != null;
         this.list.add(newTask);
     }
 

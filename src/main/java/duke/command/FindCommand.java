@@ -35,6 +35,7 @@ public class FindCommand extends Command {
         StringBuilder message = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.retrieveTask(i);
+            assert task != null;
             if (task.getTaskName().contains(keyword)) {
                 isFound = true;
                 count++;

@@ -1,12 +1,12 @@
-package duke.functionality;
+package duke.model;
 
 import duke.tasks.Task;
 
 import java.util.ArrayList;
 
 /**
- * Represents the list that is used to store the tasks in Duke. This class provides utility functions that allow Duke
- * to retrieve, delete and add tasks.
+ * Represents the list that is used to store the tasks in Duke. This class provides functions that
+ * help Duke to retrieve, delete and add tasks.
  */
 public class TaskList {
     private ArrayList<Task> list;
@@ -35,15 +35,7 @@ public class TaskList {
      * @param index the index where the task to be deleted is
      */
     public void deleteTask(int index) {
-        try {
-            this.list.remove(index - 1);
-        } catch (IndexOutOfBoundsException e) {
-            if (this.list.size() == 0) {
-                System.out.println("     O_O Your task list is completely empty!");
-            } else {
-                System.out.println("     O_O The index " + index + " cannot be found!");
-            }
-        }
+        this.list.remove(index - 1);
     }
 
     /**

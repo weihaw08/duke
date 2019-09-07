@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
 import duke.tasks.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a command to instruct Duke to find tasks that contain specific keyword(s).
@@ -24,9 +24,9 @@ public class FindCommand extends Command {
      * Executes the find command inside the {@code FindCommand} object. Duke will perform a linear search through the
      * {@code TaskList} object to look for the {@code Task} objects that match the specific keyword(s).
      *
-     * @param taskList the {@code TaskList} object in Duke
-     * @param ui       the {@code Ui} object in Duke
-     * @param storage  the {@code Storage} object in Duke
+     * @param taskList the {@code TaskList} object in duke.model.Duke
+     * @param ui       the {@code Ui} object in duke.model.Duke
+     * @param storage  the {@code Storage} object in duke.model.Duke
      * @return a string containing the possible matches that are found in the task list
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -36,16 +36,15 @@ public class FindCommand extends Command {
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.retrieveTask(i);
             if (task.getTaskName().contains(keyword)) {
-                if (!isFound) {
-                    message.append("It's a match!\n");
-                    isFound = true;
-                }
+                isFound = true;
                 count++;
                 message.append(count).append(". ").append(task.toString()).append("\n");
             }
         }
-        if (!isFound) {
-            message = new StringBuilder("UwU\" No matches found. Please try again.");
+        if (isFound) {
+            message = new StringBuilder("It's a match!\n").append(message);
+        } else {
+            message.append("UwU\" No matches found. Please try again.");
         }
         return message.toString();
     }

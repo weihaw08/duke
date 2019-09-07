@@ -26,8 +26,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String sym = this.isDone ? "Done" : "Not Done";
-        return "[T]" + "[" + sym + "] " + this.taskName;
+        return "[T]" + super.toString();
     }
 
     /**

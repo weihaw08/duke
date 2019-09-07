@@ -1,3 +1,6 @@
+package duke.ui;
+
+import duke.model.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;

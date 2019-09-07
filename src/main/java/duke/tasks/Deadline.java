@@ -32,8 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String sym = this.isDone ? "Done" : "Not Done";
-        return "[D]" + "[" + sym + "] " + this.taskName + " (by: " + this.deadline + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadline + ")";
     }
 
     /**

@@ -1,4 +1,4 @@
-package duke.functionality;
+package duke.storage;
 
 import duke.exception.InvalidTimeAndDateException;
 import duke.tasks.Deadline;
@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 /**
  * Represents the storage system of Duke. A {@code Storage} object helps to load the previously stored text file in
- * Duke and saves the updates that have been made.
+ * duke.model.Duke and saves the updates that have been made.
  */
 public class Storage {
     private File tasktext;

@@ -1,4 +1,4 @@
-package duke.functionality;
+package duke.ui;
 
 import duke.tasks.Task;
 

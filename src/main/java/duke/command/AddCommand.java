@@ -1,13 +1,13 @@
 package duke.command;
 
-import duke.functionality.Storage;
-import duke.functionality.TaskList;
-import duke.functionality.Ui;
+import duke.model.TaskList;
+import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.FormattedDate;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 /**
  * Represents the command that will add a {@code Task} object into a {@code TaskList} object.
@@ -18,8 +18,7 @@ public class AddCommand extends Command {
     private FormattedDate date2;
 
     private AddCommand(String taskName, FormattedDate date1, FormattedDate date2) {
-        super();
-        this.taskName = taskName;
+        this.taskName = taskName.trim();
         this.date1 = date1;
         this.date2 = date2;
     }
@@ -53,6 +52,7 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
+        assert taskName != null;
         if (date1 == null && date2 == null) {
             newTask = new ToDo(taskName);
         } else if (date2 == null) {

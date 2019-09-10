@@ -1,7 +1,9 @@
 package duke.model;
 
+import duke.tasks.Deadline;
 import duke.tasks.Task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -50,20 +52,39 @@ public class TaskList {
     }
 
     /**
-     * Obtains an {@code ArrayList} of {@code Task} objects that are stored in the {@code TaskList} object.
-     *
-     * @return an {@code ArrayList} of {@code Task} object
-     */
-    public ArrayList<Task> obtainList() {
-        return this.list;
-    }
-
-    /**
      * Gives the number of items that are currently inside the {@code TaskList} object.
      *
      * @return the number of items in the {@code TaskList} object
      */
     public int size() {
         return this.list.size();
+    }
+
+    /**
+     * Counts the total number of completed tasks in the task list.
+     * @return the total number of completed tasks in the task list
+     */
+    public int getNumOfCompletedTasks() {
+        int count = 0;
+        for (Task task : list) {
+            if (task.isDone()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts the number of deadline that the user has missed.
+     * @return the number of deadline tasks the user has missed
+     */
+    public long getNumOfMissedDeadlines() {
+        LocalDateTime currentTime = LocalDateTime.now();
+        return list.stream()
+                   .filter(x -> x instanceof Deadline)
+                   .filter(x -> !x.isDone())
+                   .map(x -> ((Deadline) x).getDateTime())
+                   .filter(x -> x.isBefore(currentTime))
+                   .count();
     }
 }

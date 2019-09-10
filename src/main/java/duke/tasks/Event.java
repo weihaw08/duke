@@ -5,8 +5,8 @@ package duke.tasks;
  * with a task name, start date and end date.
  */
 public class Event extends Task {
-    private FormattedDate start;
-    private FormattedDate end;
+    private FormattedDateTime start;
+    private FormattedDateTime end;
 
     /**
      * Instantiates an {@code Event} object.
@@ -15,7 +15,7 @@ public class Event extends Task {
      * @param start    the start date of the task
      * @param end      the end date of the task
      */
-    public Event(String taskName, FormattedDate start, FormattedDate end) {
+    public Event(String taskName, FormattedDateTime start, FormattedDateTime end) {
         super(taskName);
         this.start = start;
         this.end = end;
@@ -29,7 +29,7 @@ public class Event extends Task {
      * @param start    the start date of the task
      * @param end      the end date of the task
      */
-    public Event(String taskName, boolean isDone, FormattedDate start, FormattedDate end) {
+    public Event(String taskName, boolean isDone, FormattedDateTime start, FormattedDateTime end) {
         super(taskName, isDone);
         this.start = start;
         this.end = end;

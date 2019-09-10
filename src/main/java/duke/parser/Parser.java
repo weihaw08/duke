@@ -6,12 +6,10 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidTimeAndDateException;
 import duke.exception.WrongInstructionException;
-import duke.tasks.FormattedDate;
-
-import java.text.ParseException;
+import duke.tasks.FormattedDateTime;
 
 import static duke.command.AddCommand.createAddCommand;
 
@@ -38,12 +36,9 @@ public class Parser {
      * @return a {@code Command} object representing the command the {@code Parser} is fed with
      * @throws WrongInstructionException   if the command fed to the {@code Parser} object is invalid
      * @throws EmptyDescriptionException   if the command fed to the {@code Parser} object is correct but incomplete
-     * @throws ParseException              if the command fed to the {@code Parser} object has invalid date format
-     * @throws InvalidTimeAndDateException if the command fed to the {@code Parser} object has incorrect time and date
      * @throws NumberFormatException       if the command fed to the {@code Parser} object has incorrect array index
      */
-    public Command parse() throws WrongInstructionException, EmptyDescriptionException, ParseException,
-            InvalidTimeAndDateException, NumberFormatException {
+    public Command parse() throws WrongInstructionException, EmptyDescriptionException, NumberFormatException {
         String[] tokens = this.command.split(" ");
         switch (tokens[0]) {
         case "todo":
@@ -62,9 +57,15 @@ public class Parser {
             return createFindCommand(tokens);
         case "list":
             return createListCommand(tokens);
+        case "stats":
+            return createStatsCommand();
         default:
             throw new WrongInstructionException("Please stick to the list of commands that I know!");
         }
+    }
+
+    private Command createStatsCommand() {
+        return new StatsCommand();
     }
 
     private Command createListCommand(String[] tokens) throws WrongInstructionException {
@@ -115,37 +116,27 @@ public class Parser {
         }
     }
 
-    private Command createEvent(String[] tokens) throws EmptyDescriptionException, WrongInstructionException,
-        ParseException, InvalidTimeAndDateException {
+    private Command createEvent(String[] tokens) throws EmptyDescriptionException, WrongInstructionException {
         if (tokens.length == 1 || tokens[1].equals("/at")) {
             throw new EmptyDescriptionException("event");
-        } else if (!this.command.contains("/at")) {
-            throw new WrongInstructionException("I only recognise \"event task_name /at start_date "
-                    + "- end_date\"!");
-        } else {
-            String modifiedCommand = this.command.replace("event", "");
-            String[] split = modifiedCommand.split(" /at ");
-            String[] splitDates = split[1].split(" - ");
-            return createValidEvent(split, splitDates);
         }
-    }
 
-    /**
-     * Helps the main createEvent function to check if the dates entered for the event task are valid. If the dates
-     * entered are valid, a new {@code Command} object is created.
-     */
-    private Command createValidEvent(String[] split, String[] splitDates) throws WrongInstructionException,
-        ParseException, InvalidTimeAndDateException {
+        if (!this.command.contains("/at")) {
+            throw new WrongInstructionException("I only recognise \"event task_name /at start_date "
+                + "- end_date\"!");
+        }
+
+        String modifiedCommand = this.command.replace("event", "");
+        String[] split = modifiedCommand.split(" /at ");
+        String[] splitDates = split[1].split(" - ");
         if (splitDates.length != 2) {
             throw new WrongInstructionException("Please enter 2 dates for an event!");
         } else {
-            FormattedDate start = new FormattedDate(splitDates[0]);
-            FormattedDate end = new FormattedDate(splitDates[1]);
-            if (start.compareTo(end) > 0) {
-                throw new InvalidTimeAndDateException(split[1]);
-            }
+            FormattedDateTime start = new FormattedDateTime(splitDates[0]);
+            FormattedDateTime end = new FormattedDateTime(splitDates[1]);
             return createAddCommand(split[0], start, end);
         }
+
     }
 
     private Command createToDo(String[] tokens) throws EmptyDescriptionException {
@@ -156,8 +147,7 @@ public class Parser {
         }
     }
 
-    private Command createDeadline(String[] tokens) throws EmptyDescriptionException, WrongInstructionException,
-        ParseException, InvalidTimeAndDateException {
+    private Command createDeadline(String[] tokens) throws EmptyDescriptionException, WrongInstructionException {
         if (tokens.length == 1 || tokens[1].equals("/by")) {
             throw new EmptyDescriptionException("deadline");
         } else if (!this.command.contains("/by")) {
@@ -165,7 +155,7 @@ public class Parser {
         } else {
             String modifiedCommand = this.command.replace("deadline", "");
             String[] split = modifiedCommand.split(" /by ");
-            FormattedDate deadlineDate = new FormattedDate(split[1]);
+            FormattedDateTime deadlineDate = new FormattedDateTime(split[1]);
             return createAddCommand(split[0], deadlineDate);
         }
     }

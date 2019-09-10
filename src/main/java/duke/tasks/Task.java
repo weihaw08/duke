@@ -33,5 +33,9 @@ public abstract class Task {
         return "[" + sym + "] " + this.taskName;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public abstract String convertToText();
 }

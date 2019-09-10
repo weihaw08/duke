@@ -1,10 +1,11 @@
 package duke.command;
 
 import duke.model.TaskList;
+import duke.statistics.WeeklyStatistics;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.FormattedDate;
+import duke.tasks.FormattedDateTime;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
@@ -14,10 +15,10 @@ import duke.ui.Ui;
  */
 public class AddCommand extends Command {
     private String taskName;
-    private FormattedDate date1;
-    private FormattedDate date2;
+    private FormattedDateTime date1;
+    private FormattedDateTime date2;
 
-    private AddCommand(String taskName, FormattedDate date1, FormattedDate date2) {
+    private AddCommand(String taskName, FormattedDateTime date1, FormattedDateTime date2) {
         this.taskName = taskName.trim();
         this.date1 = date1;
         this.date2 = date2;
@@ -31,7 +32,7 @@ public class AddCommand extends Command {
      * @param dates    the timing of the dates if applicable
      * @return an {@code AddCommand} object
      */
-    public static AddCommand createAddCommand(String taskName, FormattedDate... dates) {
+    public static AddCommand createAddCommand(String taskName, FormattedDateTime... dates) {
         if (dates.length == 0) {
             return new AddCommand(taskName, null, null);
         } else if (dates.length == 1) {
@@ -50,7 +51,7 @@ public class AddCommand extends Command {
      * @param storage  the {@code Storage} object in Duke
      * @return a string containing the information of the task that has been added
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, WeeklyStatistics stats, Ui ui, Storage storage) {
         Task newTask;
         if (date1 == null && date2 == null) {
             newTask = new ToDo(taskName);
@@ -59,6 +60,7 @@ public class AddCommand extends Command {
         } else {
             newTask = new Event(taskName, date1, date2);
         }
+        stats.addLatestIncompleteTask();
         taskList.addTask(newTask);
         return ui.printTaskModification(taskList.size(), newTask, "add");
     }

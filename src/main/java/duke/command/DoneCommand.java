@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.model.TaskList;
+import duke.statistics.WeeklyStatistics;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -30,11 +31,12 @@ public class DoneCommand extends Command {
      * @return a string representing the information of the task that has been marked as done or a string representing
      *     the exception encountered
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, WeeklyStatistics stats, Ui ui, Storage storage) {
         try {
             Task completedTask = taskList.retrieveTask(indexToComplete);
             assert completedTask != null;
             completedTask.markAsDone();
+            stats.addLatestCompletedTask();
             return ui.printTaskModification(taskList.size(), completedTask, "done");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {

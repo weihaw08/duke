@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.model.TaskList;
+import duke.statistics.WeeklyStatistics;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -30,11 +31,14 @@ public class DeleteCommand extends Command {
      * @return a string representing the information of the task that has been deleted or a string representing an
      *     exception encountered
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, WeeklyStatistics stats, Ui ui, Storage storage) {
         try {
             Task toBeRemoved = taskList.retrieveTask(indexToRemove);
             assert toBeRemoved != null;
             taskList.deleteTask(indexToRemove);
+            if (!toBeRemoved.isDone()) {
+                stats.reduceLatestIncompleteTask();
+            }
             return ui.printTaskModification(taskList.size(), toBeRemoved, "delete");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {

@@ -1,11 +1,13 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task that has to be completed before a certain time. A {@code Deadline} object is a {@code Task}
  * object with a task name and a deadline.
  */
 public class Deadline extends Task {
-    private FormattedDate deadline;
+    private FormattedDateTime deadline;
 
     /**
      * Instantiates a {@code Deadline} object.
@@ -13,7 +15,7 @@ public class Deadline extends Task {
      * @param taskName the name of the task
      * @param deadline the time in which the task is due
      */
-    public Deadline(String taskName, FormattedDate deadline) {
+    public Deadline(String taskName, FormattedDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
     }
@@ -25,7 +27,7 @@ public class Deadline extends Task {
      * @param isDone   the state of the task
      * @param deadline the time in which the task is due
      */
-    public Deadline(String taskName, boolean isDone, FormattedDate deadline) {
+    public Deadline(String taskName, boolean isDone, FormattedDateTime deadline) {
         super(taskName, isDone);
         this.deadline = deadline;
     }
@@ -44,5 +46,9 @@ public class Deadline extends Task {
     public String convertToText() {
         return "D" + " ~ " + this.isDone + " ~ " + this.taskName
             + " ~ " + this.deadline;
+    }
+
+    public LocalDateTime getDateTime() {
+        return this.deadline.getDateAndTime();
     }
 }

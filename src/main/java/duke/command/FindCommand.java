@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.model.TaskList;
+import duke.statistics.WeeklyStatistics;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
@@ -29,10 +30,11 @@ public class FindCommand extends Command {
      * @param storage  the {@code Storage} object in duke.model.Duke
      * @return a string containing the possible matches that are found in the task list
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, WeeklyStatistics stats, Ui ui, Storage storage) {
         boolean isFound = false;
         int count = 0;
         StringBuilder message = new StringBuilder();
+
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.retrieveTask(i);
             assert task != null;
@@ -42,6 +44,7 @@ public class FindCommand extends Command {
                 message.append(count).append(". ").append(task.toString()).append("\n");
             }
         }
+
         if (isFound) {
             message = new StringBuilder("It's a match!\n").append(message);
         } else {

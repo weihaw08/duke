@@ -1,16 +1,13 @@
 package duke.tasks;
 
-import duke.exception.InvalidTimeAndDateException;
 import org.junit.jupiter.api.Test;
-
-import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
 
     @Test
-    void testStringConversion() throws InvalidTimeAndDateException, ParseException {
+    void testStringConversion() {
         // Testing string conversion for constructor 1
         FormattedDateStub date = new FormattedDateStub("s");
         Deadline d1 = new Deadline("project meeting", date);
@@ -22,7 +19,7 @@ class DeadlineTest {
     }
 
     @Test
-    void testIsDoneFunction() throws InvalidTimeAndDateException, ParseException {
+    void testIsDoneFunction() {
         FormattedDateStub date = new FormattedDateStub("s");
         Deadline d1 = new Deadline("project meeting", date);
         d1.markAsDone();
@@ -30,7 +27,7 @@ class DeadlineTest {
     }
 
     @Test
-    void testTextConversion() throws InvalidTimeAndDateException, ParseException {
+    void testTextConversion() {
         FormattedDateStub date = new FormattedDateStub("s");
         Deadline d1 = new Deadline("sleep", date);
         Deadline d2 = new Deadline("sleep", true, date);

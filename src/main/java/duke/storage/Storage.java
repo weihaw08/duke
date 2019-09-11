@@ -38,10 +38,10 @@ public class Storage {
     private void initialiseFile(File file) {
         try {
             if (!file.exists()) {
-                taskText.getParentFile().mkdir();
-                taskText.createNewFile();
+                file.getParentFile().mkdir();
+                file.createNewFile();
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             System.out.println("Invalid file path! Please enter a correct file path!");
         }
     }

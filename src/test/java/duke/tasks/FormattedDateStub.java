@@ -1,12 +1,8 @@
 package duke.tasks;
 
-import duke.exception.InvalidTimeAndDateException;
+class FormattedDateStub extends FormattedDateTime {
 
-import java.text.ParseException;
-
-class FormattedDateStub extends FormattedDate {
-
-    FormattedDateStub(String s) throws ParseException, InvalidTimeAndDateException {
+    FormattedDateStub(String s) {
         super("20/10/3999 2345");
     }
 

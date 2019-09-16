@@ -68,6 +68,7 @@ Now you have 2 tasks in the list.
 ```
 
 Image example:
+
 ![Deadline Example](./deadlineexample.png)
 
 ### 3. `event <task> /at dd/MM/yyyy HHmm - dd/MM/yyyy HHmm` - Adds an `Event` task
@@ -90,6 +91,7 @@ Now you have 3 tasks in the list.
 ```
 
 Image example:
+
 ![Event example](./eventexample.png)
 
 ### 4. `done <index>` - Marks task as done
@@ -108,6 +110,7 @@ Expected outcome:
 ```
 
 Image example:
+
 ![Done Example](./doneexample.png)
 
 ### 5. `delete <index>` - Deletes task
@@ -127,6 +130,7 @@ Now you have 2 tasks in the list
 ```
 
 Image example:
+
 ![Delete Example](./deleteexample.png)
 
 ### 6. `list` - Lists all the tasks
@@ -146,6 +150,7 @@ Expected outcome:
 ```
 
 Image example:
+
 ![List Example](./listexample.png)
 
 ### 7. `find <keyword>` - Finds all tasks with the keyword
@@ -165,6 +170,7 @@ It's a match!
 ```
 
 Image example:
+
 ![Find Example](./findexample.png)
 
 ### 8. `stats` - Print out statistics
@@ -188,6 +194,7 @@ You have missed 0 deadlines.
 ```
 
 Image example:
+
 ![Stats Example](./statsexample.png)
 
 ## Credits

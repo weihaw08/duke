@@ -27,6 +27,7 @@ public class Main extends Application {
             MainWindow userInterface = fxmlLoader.getController();
             userInterface.setDuke(duke);
             userInterface.printWelcomeMessage();
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

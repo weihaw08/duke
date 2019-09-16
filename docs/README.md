@@ -197,5 +197,13 @@ Image example:
 
 ![Stats Example](./statsexample.png)
 
+### 9. `bye` - Exits Duke
+This command will help to store all the tasks that you have entered in Duke. After which,
+the Duke application will close.
+
+Example of usage:
+
+`bye`
+
 ## Credits
 The Pikachu image is adapted from [zerochan](https://www.zerochan.net/1659646).

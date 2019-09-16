@@ -62,6 +62,6 @@ public class AddCommand extends Command {
         }
         stats.addLatestIncompleteTask();
         taskList.addTask(newTask);
-        return ui.printTaskModification(taskList.size(), newTask, "add");
+        return ui.getTaskModificationNotice(taskList.size(), newTask, "add");
     }
 }

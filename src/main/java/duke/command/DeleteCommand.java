@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
             if (!toBeRemoved.isDone()) {
                 stats.reduceLatestIncompleteTask();
             }
-            return ui.printTaskModification(taskList.size(), toBeRemoved, "delete");
+            return ui.getTaskModificationNotice(taskList.size(), toBeRemoved, "delete");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {
                 return ui.getEmptyListMessage();

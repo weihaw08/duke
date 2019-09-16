@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
             assert completedTask != null;
             completedTask.markAsDone();
             stats.addLatestCompletedTask();
-            return ui.printTaskModification(taskList.size(), completedTask, "done");
+            return ui.getTaskModificationNotice(taskList.size(), completedTask, "done");
         } catch (IndexOutOfBoundsException e) {
             if (taskList.size() == 0) {
                 return ui.getEmptyListMessage();

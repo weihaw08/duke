@@ -39,7 +39,7 @@ public class Ui {
      * @param modification the type of modification: "done", "add", "delete"
      * @return a string representing the information of the modification that has been carried out
      */
-    public String printTaskModification(int size, Task modifiedTask, String modification) {
+    public String getTaskModificationNotice(int size, Task modifiedTask, String modification) {
         String message;
         boolean isListModified;
         if (modification.equals("add")) {

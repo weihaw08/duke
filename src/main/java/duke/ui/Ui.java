@@ -72,7 +72,7 @@ public class Ui {
 
     public String getInvalidDateFormatMessage() {
         return "Please enter your date in \"dd/MM/yyyy HHmm\" format!\n"
-            + "Ensure that your day, month and time are correct too.";
+            + "Ensure that the times are correct and are in chronological order (if applicable).";
     }
 
 

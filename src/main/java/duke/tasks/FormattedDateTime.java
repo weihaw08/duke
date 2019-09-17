@@ -37,6 +37,10 @@ public class FormattedDateTime {
         return this.getDate().format(dateFormatter);
     }
 
+    public boolean isAfter(FormattedDateTime anotherDateTime) {
+        return this.dateTime.isAfter(anotherDateTime.dateTime);
+    }
+
     @Override
     public String toString() {
         return this.dateTime.format(formatter);

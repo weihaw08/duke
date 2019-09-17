@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.model.TaskList;
 import duke.statistics.WeeklyStatistics;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.FormattedDateTime;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
 

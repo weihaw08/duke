@@ -1,7 +1,4 @@
-package duke.model;
-
-import duke.tasks.Deadline;
-import duke.tasks.Task;
+package duke.tasks;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

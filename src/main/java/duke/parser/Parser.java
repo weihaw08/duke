@@ -11,6 +11,8 @@ import duke.exception.EmptyDescriptionException;
 import duke.exception.WrongInstructionException;
 import duke.tasks.FormattedDateTime;
 
+import java.time.format.DateTimeParseException;
+
 import static duke.command.AddCommand.createAddCommand;
 
 
@@ -116,7 +118,8 @@ public class Parser {
         }
     }
 
-    private Command createEvent(String[] tokens) throws EmptyDescriptionException, WrongInstructionException {
+    private Command createEvent(String[] tokens) throws EmptyDescriptionException, WrongInstructionException,
+        DateTimeParseException {
         if (tokens.length == 1 || tokens[1].equals("/at")) {
             throw new EmptyDescriptionException("event");
         }
@@ -134,6 +137,10 @@ public class Parser {
         } else {
             FormattedDateTime start = new FormattedDateTime(splitDates[0]);
             FormattedDateTime end = new FormattedDateTime(splitDates[1]);
+            if (start.isAfter(end)) {
+                String emptyString = "";
+                throw new DateTimeParseException(emptyString, start.toString(), 0);
+            }
             return createAddCommand(split[0], start, end);
         }
 

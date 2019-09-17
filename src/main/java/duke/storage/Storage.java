@@ -1,12 +1,12 @@
 package duke.storage;
 
-import duke.model.TaskList;
 import duke.statistics.DailyStatistics;
 import duke.statistics.WeeklyStatistics;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.FormattedDateTime;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
 import java.io.File;

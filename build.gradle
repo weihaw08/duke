@@ -3,7 +3,6 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 checkstyle {
@@ -17,8 +16,9 @@ shadowJar {
     archiveAppendix = null
 }
 
+//@@author Oscar-B-Liang - reused
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '11.0.1'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -50,15 +50,6 @@ version '0.1.0'
 
 repositories {
     mavenCentral()
-}
-
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml']
-}
-
-run {
-    enableAssertions = true
 }
 
 application {

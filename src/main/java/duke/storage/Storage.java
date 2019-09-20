@@ -96,9 +96,8 @@ public class Storage {
      */
     private void initialiseFirstStats(TaskList taskList, WeeklyStatistics statsList) {
         FormattedDateTime currentDate = createStatsDate(LocalDate.now());
-        int completedTasks = taskList.getNumOfCompletedTasks();
-        int incompleteTasks = taskList.size() - completedTasks;
-        DailyStatistics newStats = new DailyStatistics(currentDate, completedTasks, incompleteTasks, 0);
+        int incompleteTasks = taskList.getNumOfIncompleteTasks();
+        DailyStatistics newStats = new DailyStatistics(currentDate, 0, incompleteTasks, 0);
         statsList.addNewDailyStatistics(newStats);
     }
 
@@ -108,8 +107,7 @@ public class Storage {
      */
     private void addMissingStats(TaskList taskList, WeeklyStatistics statsList) {
         LocalDate currentDate = LocalDate.now();
-        int completedTasks = taskList.getNumOfCompletedTasks();
-        int incompleteTasks = taskList.size() - completedTasks;
+        int incompleteTasks = taskList.getNumOfIncompleteTasks();
         long missedDeadlines = taskList.getNumOfMissedDeadlines();
         LocalDate latestDate = statsList.getLatestDate();
         if (!latestDate.isEqual(currentDate)) {
@@ -118,12 +116,11 @@ public class Storage {
             for (long i = minDiff; i >= 0; i--) {
                 LocalDate date = currentDate.minusDays(i);
                 FormattedDateTime dateTime = createStatsDate(date);
-                DailyStatistics statsToAdd = new DailyStatistics(dateTime, completedTasks, incompleteTasks,
+                DailyStatistics statsToAdd = new DailyStatistics(dateTime, 0, incompleteTasks,
                     missedDeadlines);
                 statsList.addNewDailyStatistics(statsToAdd);
             }
         }
-        statsList.updateLatestStats(completedTasks, incompleteTasks, missedDeadlines);
     }
 
 

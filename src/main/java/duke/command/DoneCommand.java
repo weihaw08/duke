@@ -11,6 +11,7 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
     private int indexToComplete;
+    private final String taskIsAlreadyDoneMessage = "o.o. That task is already done.";
 
     /**
      * Instantiates a {@code DoneCommand} object.
@@ -35,6 +36,9 @@ public class DoneCommand extends Command {
         try {
             Task completedTask = taskList.retrieveTask(indexToComplete);
             assert completedTask != null;
+            if (completedTask.isDone()) {
+                return taskIsAlreadyDoneMessage;
+            }
             completedTask.markAsDone();
             stats.addLatestCompletedTask();
             return ui.getTaskModificationNotice(taskList.size(), completedTask, "done");

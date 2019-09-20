@@ -61,7 +61,7 @@ public class TaskList {
      * Counts the total number of completed tasks in the task list.
      * @return the total number of completed tasks in the task list
      */
-    public int getNumOfCompletedTasks() {
+    private int getNumOfCompletedTasks() {
         int count = 0;
         for (Task task : list) {
             if (task.isDone()) {
@@ -69,6 +69,14 @@ public class TaskList {
             }
         }
         return count;
+    }
+
+    /**
+     * Counts the number of incomplete tasks in the task list.
+     * @return the number of incomplete tasks in the task list
+     */
+    public int getNumOfIncompleteTasks() {
+        return this.size() - this.getNumOfCompletedTasks();
     }
 
     /**
